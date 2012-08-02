@@ -1,0 +1,42 @@
+<html>
+<head>
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+	<script src="lib/sockjs.min.js"></script>
+	<script src="lib/jquery.min.js"></script>
+	<script src="lib/moment.min.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="client.js"></script>
+</head>
+<body>
+	<div class="container-fluid" style="padding-top: 50px;">
+		<div class="row-fluid">
+			<div class="span8">
+				<form class="well form-vertical">
+					<fieldset>
+						<legend>Actions</legend>
+						<input id="send" class="btn btn-mini btn-primary" type="button" value="Send">
+						<input id="close" class="btn btn-mini btn-primary" type="button" value="Close">
+						<input id="open" class="btn btn-mini btn-primary" type="button" value="Open">
+						<input id="block" class="btn btn-mini btn-danger" type="button" value="Block">
+						<input id="new" class="btn btn-mini btn-warning" type="button" value="Many">
+						<input id="fib" class="btn btn-mini btn-warning" type="button" value="Fib">
+						<input id="clean" class="btn btn-mini btn-info" type="button" value="Clean">
+						<select id="protocol">
+							<option>websocket</option>
+							<option>xhr-streaming</option>
+							<option>xhr-polling</option>
+							<option>jsonp-polling</option>
+							<option>xdr-streaming</option>
+							<option>xdr-polling</option>
+						</select>
+					</fieldset>
+				</form>
+			</div>
+			<div class="span10">
+				<div style="font-family: Verdana; font-size: 10px;" id="messages"></div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
