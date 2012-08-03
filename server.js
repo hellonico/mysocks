@@ -11,7 +11,6 @@ var count = 0;
 
 echo.on('connection', function(conn) {
     count ++;
-    count--;
     lesconnection.push(conn);
     
     // tell new comer
@@ -29,9 +28,9 @@ echo.on('connection', function(conn) {
     conn.on('data', function(message) {
         try {
             var message = JSON.parse(message);
-            conn.write(JSON.stringify())
+            conn.write(JSON.stringify(message));
         } catch(err){
-            // console.log(err);
+            console.log(err);
             conn.write(message);
         }
         
