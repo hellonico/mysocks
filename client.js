@@ -66,9 +66,9 @@ $("#bigsend").live("click", function(event) {
     var now1 = moment();
     for(i=0;i<count;i++) {
         lag(".");
-        setTimeout(function() {
-            sock.send("{type:'hello'}");
-        }, i);
+        // setTimeout(function() {
+         sock.send(JSON.stringify({type:'hello', data: "small message"}));
+        // }, 1000*i);
     }
     var now2 = moment();
     log("<br/>finish sending plenty of messages:" + (now2-now1) + " ms");
