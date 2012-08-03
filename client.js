@@ -5,26 +5,30 @@ function fibonacci(n) {
 }
 
 // https://github.com/sockjs/sockjs-client/
-var endpoint = 'http://stats.sh.nhkdom.testing.fivecool.org/api'
-var whitelist = ["jsonp-polling"];
+// var endpoint = 'http://stats.sh.nhkdom.testing.fivecool.org:8080/api';
+// var endpoint = 'http://stats.sh.nhkdom.testing.fivecool.org/api';
+var endpoint = 'http://192.168.150.113:9999/echo';
+var whitelist = ["websocket"];
 
 function log(message) {
 	$("#messages").append(message+"<br/>");
 }
+function lag(message) {
+	$("#messages").append(message);
+}
 var sock = init();
 
 function init() {
-	log("Endpoint is:"+endpoint+": whitelist:"+whitelist);
 	var soc = new SockJS(endpoint, null, {devel:true, protocols_whitelist: whitelist});
 	soc.onopen = function() {
 		log("<i class=\"icon-thumbs-up\"></i> Open");
 	};
 	soc.onmessage = function(e) {
-		log("Message:"+e.data);
+		log("<i>Message:"+e.data+"</i>");
 	};
 	soc.onclose = function() {
 		log("<i class=\"icon-thumbs-down\"></i> Close");
-		soc.open();	
+		//soc.open();	
 	};
 	return soc;
 }
@@ -41,7 +45,35 @@ $("#close").live("click", function(event) {
 	sock.close();
 });
 $("#open").live("click", function(event) {
+    log("Endpoint is:"+endpoint+": whitelist:"+whitelist);
 	sock = init();
+});
+$("#rec").live("click", function(event) {
+    log("Reconnect");
+    sock.close();
+    // sock.open();
+    sock = init();
+});
+function getI() {
+        var i = parseInt($("#numbers").val()); 
+        if(i > 0)
+        return i;
+        
+        return 10;
+
+}
+$("#bigsend").live("click", function(event) {
+    var count = getI();
+    log("sending "+count+" messages");
+    var now1 = moment();
+    for(i=0;i<count;i++) {
+        lag(".");
+        setTimeout(function() {
+            sock.send("{type:'hello'}");
+        }, i);
+    }
+    var now2 = moment();
+    log("<br/>finish sending plenty of messages:" + (now2-now1) + " ms");
 });
 
 $("#protocol").live("change", function(event) {
@@ -54,10 +86,15 @@ $("#protocol").live("change", function(event) {
 
 var conns = [];
 $("#new").live("click", function(event) {
-	log("Starting new connection");
-	for (i=0;i<10000;i++) {
-		conns.push(init());
+    var c = getI();
+	log("Starting new connections ["+c+"]");
+	for (i=0;i<c;i++) {
+        // lag(".");
+        setTimeout(function() {
+	        conns.push(init());
+        }, i*5);
 	}
+	log("Finished new connections");
 });
 $("#fib").live("click", function(event) {
 	log("Starting fib");

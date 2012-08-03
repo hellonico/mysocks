@@ -17,11 +17,14 @@
 						<input id="send" class="btn btn-mini btn-primary" type="button" value="Send">
 						<input id="close" class="btn btn-mini btn-primary" type="button" value="Close">
 						<input id="open" class="btn btn-mini btn-primary" type="button" value="Open">
+						<input id="rec" class="btn btn-mini btn-primary" type="button" value="Reconnect">
 						<input id="block" class="btn btn-mini btn-danger" type="button" value="Block">
 						<input id="new" class="btn btn-mini btn-warning" type="button" value="Many">
 						<input id="fib" class="btn btn-mini btn-warning" type="button" value="Fib">
+						<input id="bigsend" class="btn btn-mini btn-warning" type="button" value="Big">
 						<input id="clean" class="btn btn-mini btn-info" type="button" value="Clean">
-						<select id="protocol">
+						<br/><br/>
+						<select class="span3" id="protocol">
 							<option>websocket</option>
 							<option>xhr-streaming</option>
 							<option>xhr-polling</option>
@@ -29,6 +32,7 @@
 							<option>xdr-streaming</option>
 							<option>xdr-polling</option>
 						</select>
+						<input id="numbers" type="text" value="1000" class="span3 form-inline" placeholder="Count…">
 					</fieldset>
 				</form>
 			</div>
