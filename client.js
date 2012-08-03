@@ -5,9 +5,7 @@ function fibonacci(n) {
 }
 
 // https://github.com/sockjs/sockjs-client/
-// var endpoint = 'http://stats.sh.nhkdom.testing.fivecool.org:8080/api';
-// var endpoint = 'http://stats.sh.nhkdom.testing.fivecool.org/api';
-var endpoint = 'http://192.168.150.113:9999/echo';
+var endpoint = 'http://localhost:9999/echo';
 var whitelist = ["websocket"];
 
 function log(message) {
